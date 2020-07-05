@@ -3,7 +3,7 @@
 # get latest papermc jar
 curl --progress-bar https://papermc.io/api/v1/paper/1.16.1/latest/download -o server.jar
 
-# get latest EssentialsX release
+# get latest EssentialsX release jars
 ./update_plugins.py
 
 # get Vault
