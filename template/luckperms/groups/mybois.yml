@@ -1,0 +1,26 @@
+name: mybois
+permissions:
+- essentials.time.*
+- essentials.back
+- essentials.delhome
+- essentials.delwarp
+- essentials.help
+- essentials.home
+- essentials.info
+- essentials.list
+- essentials.motd
+- essentials.msg
+- essentials.seen
+- essentials.sethome
+- essentials.setwarp
+- essentials.time
+- essentials.time.set
+- essentials.tpa
+- essentials.tpaccept
+- essentials.tpahere
+- essentials.tpauto
+- essentials.tpdeny
+- essentials.warp
+- essentials.warp.list
+parents:
+- default

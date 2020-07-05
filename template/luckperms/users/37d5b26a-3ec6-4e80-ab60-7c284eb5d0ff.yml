@@ -1,0 +1,7 @@
+uuid: 37d5b26a-3ec6-4e80-ab60-7c284eb5d0ff
+name: fallalex
+primary-group: default
+permissions:
+- luckperms.*
+parents:
+- mybois

@@ -1,0 +1,19 @@
+name: aboi
+permissions:
+- essentials.break
+- essentials.deljail
+- essentials.exp
+- essentials.fly
+- essentials.getpos
+- essentials.jails
+- essentials.setjail
+- essentials.tempban
+- essentials.togglejail
+- essentials.tp
+- essentials.tphere
+- essentials.tppos
+- essentials.unban
+- essentials.weather
+- weight.2
+parents:
+- mybois
