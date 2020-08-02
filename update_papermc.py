@@ -4,6 +4,8 @@ import requests
 import json
 from os.path import realpath
 import pathlib
+from tqdm import tqdm
+import sys
 
 API_ENDPOINT = "https://papermc.io/api/v1/paper/"
 WORKING_DIR = pathlib.Path(realpath(__file__)).parent
@@ -12,13 +14,25 @@ SERVER_INFO_PATH = WORKING_DIR / "papermc_info.json"
 SERVER_NAME = "PaperMC"
 SERVER_JAR_PATH = WORKING_DIR / "server.jar"
 
+def download_file(url, filepath):
+    chunk_size = 1024  # 1 MB
+    with requests.get(url, stream=True) as r:
+        file_size = int(r.headers.get('content-length'))
+        num_bars = file_size // chunk_size
+        with open(filepath, 'wb') as f:
+            for chunk in tqdm(r.iter_content(chunk_size=chunk_size),
+                              total=num_bars,
+                              unit='KB',
+                              desc=str(filepath),
+                              leave=True,
+                              file=sys.stdout):
+                f.write(chunk)
+
 def papermc_update(server_info, version, build):
     # 'server_info' can be an empty dict
     download_endpoint = API_ENDPOINT + version + '/' + str(build) + '/download'
     print("Downloading from '{}'...".format(download_endpoint))
-    r = requests.get(download_endpoint)
-    with open(SERVER_JAR_PATH, 'wb') as jar:
-        jar.write(r.content)
+    download_file(download_endpoint, SERVER_JAR_PATH)
     print("Done '{}'".format(SERVER_JAR_PATH))
     if 'name' not in server_info:
         server_info['name'] = SERVER_NAME
