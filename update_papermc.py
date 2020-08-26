@@ -54,9 +54,13 @@ def papermc_check(version):
         r = requests.get(API_ENDPOINT + version)
         r = json.loads(r.text)
         latest_build = int(r['builds']['latest'])
-        if (SERVER_INFO_PATH).exists():
-            with open(SERVER_INFO_PATH, 'r') as f:
-                server_info = json.loads(f.read())
+        if SERVER_INFO_PATH.exists() and SERVER_INFO_PATH.stat().st_size > 0:
+            try:
+                with open(SERVER_INFO_PATH, 'r') as f:
+                    server_info = json.loads(f.read())
+            except JSONDecodeError as e:
+                print("Could not decode json from '{}'".format(str(SERVER_INFO_PATH)))
+                return
             if version != server_info['version']:
                 print("Version change from '{}' to '{}'. Please update manually.".format(server_info['version'], version))
                 return
