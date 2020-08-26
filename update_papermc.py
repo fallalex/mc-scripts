@@ -54,7 +54,7 @@ def papermc_check(version):
         r = requests.get(API_ENDPOINT + version)
         r = json.loads(r.text)
         latest_build = int(r['builds']['latest'])
-        if SERVER_INFO_PATH.is_file() and SERVER_INFO_PATH.stat().st_size =! 0:
+        if SERVER_INFO_PATH.is_file() and SERVER_INFO_PATH.stat().st_size != 0:
             try:
                 with open(SERVER_INFO_PATH, 'r') as f:
                     server_info = json.loads(f.read())
