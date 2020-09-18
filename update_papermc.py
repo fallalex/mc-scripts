@@ -44,12 +44,14 @@ def papermc_update(server_info, version, build):
         f.write(json.dumps(server_info))
     print("Finished update.")
 
-
 def papermc_check(version):
     # assume ordered latest to earliest
     r = requests.get(API_ENDPOINT)
     r = json.loads(r.text)
     if version in r['versions']:
+        version_idx = r['versions'].index(version)
+        if version_idx > 0:
+            print('New release(s) available:', r['versions'][:version_idx])
         print("Using version '{}'".format(version))
         r = requests.get(API_ENDPOINT + version)
         r = json.loads(r.text)
@@ -84,4 +86,4 @@ def papermc_check(version):
         print("Version '{}' not found. Options are:".format(version))
         print(r['versions'])
 
-papermc_check("1.16.2")
+papermc_check("1.16.3")
