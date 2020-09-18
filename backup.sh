@@ -5,5 +5,6 @@ PARENTDIR=/opt
 GAMEDIR=$PARENTDIR/minecraft-$TYPE
 
 DATE=`date "+%Y%m%d%H%M%S"`
-
-tar czvf ${TYPE}-bak-${DATE}.tar.gz $GAMEDIR
+TAR=${TYPE}-bak-${DATE}.tar.gz
+tar czvf $TAR $GAMEDIR
+mv $TAR $PARENTDIR/bak/
